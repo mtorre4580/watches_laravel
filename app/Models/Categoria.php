@@ -17,4 +17,6 @@ class Categoria extends Model {
 
     protected $primaryKey = 'id_categoria';
 
+    protected $fillable = ['descripcion'];
+
 }

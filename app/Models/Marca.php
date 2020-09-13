@@ -18,6 +18,8 @@ class Marca extends Model {
 
     protected $primaryKey = 'id_marca';
 
+    protected $fillable = ['nombre', 'logo', 'web', 'historia', 'origen'];
+
     /**
      * Permite obtener el top 5 de las marcas, por ahora lo simulo trayendo sólo las que tienen imágenes
      */

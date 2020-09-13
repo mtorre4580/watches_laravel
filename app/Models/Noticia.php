@@ -31,6 +31,15 @@ class Noticia extends Model {
 
     public static $rules = ['titulo' => 'required|min:3', 'id_categoria' => 'required|integer', 'contenido' => 'required|min:40'];
 
+    public static $errorMessages = [
+      'titulo.required' => 'El título es obligatorio',
+      'titulo.min' => 'El título debe tener un mínimo 3 carácteres',
+      'id_categoria.required'=> 'El id de la categoría es obligatorio',
+      'id_categoria.integer' => 'El id de la categoría debe ser un número',
+      'contenido.required' => 'El contenido es obligatorio',
+      'contenido.min' => 'El contenido debe tener un mínimo de 40 carácteres',
+    ];
+
     /**
      * Permite realizar la asociación contra la tabla categoria (fk)
      */
