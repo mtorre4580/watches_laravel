@@ -14,7 +14,6 @@ class ExampleTest extends TestCase
      */
     public function testBasicTest()
     {
-        echo "ooola";
         $this->assertTrue(true);
     }
 }
