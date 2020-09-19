@@ -19,7 +19,7 @@ class PanelController extends Controller {
 
     /**
      * Realiza el render de la vista que actua como index 
-     * @return void
+     * @return View
      */
     public function index() {
         $noticias = Noticia::with('categoria')->get();
@@ -31,7 +31,7 @@ class PanelController extends Controller {
      * Realiza el render de la vista del formulario para editar una noticia
      * agrega los comentarios que posee la noticia para poder manipularlos en el caso que
      * fuera necesario
-     * @return void
+     * @return View
      */
     public function formEditar($id) {
         $noticia = Noticia::find($id);
@@ -42,7 +42,7 @@ class PanelController extends Controller {
 
     /**
      * Realiza el render de la vista del formulario para dar de alta una noticia
-     * @return void
+     * @return View
      */
     public function formAgregar() {
         $categorias = Categoria::all();

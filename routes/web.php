@@ -1,15 +1,5 @@
 <?php
 
-/*
-|--------------------------------------------------------------------------
-| Rutas App
-|--------------------------------------------------------------------------
-|
-| Se encuentran todas las rutas de la aplicación.
-| Se utiliza el middleware de autenticación si la acción requiere autenticación
-|
-*/
-
 Route::get('/', [
     'as' => 'home.index',
     'uses' => 'HomeController@index'

@@ -11,7 +11,7 @@
     </section>
     <section class="container my-2">
         <h2 class="my-2 subtitulo-edit-form">Comentarios</h2>
-        <div class="container" style="padding-top:2em">
+        <div class="container">
             @if(count($comentarios) > 0)
                 <div>
                     <table class="table">

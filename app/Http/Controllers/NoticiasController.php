@@ -15,14 +15,14 @@ use Auth;
 |--------------------------------------------------------------------------
 |
 | Este controller muestra toda la información relacionada con las noticias
-| realiza los render de las vistas, redirect, consulta información de las noticias, categorias
-| tambien actua con las acciones de una API básica
+| realiza los render de las vistas, redirect, consulta información de las noticias, categorías
+| Actua con las acciones de una API básica
 */
 class NoticiasController extends Controller {
 
     /**
      * Realiza el render de la vista que actua como index 
-     * @return void
+     * @return View
      */
     public function index() {
         $noticias = Noticia::with('categoria')->get();
@@ -32,8 +32,8 @@ class NoticiasController extends Controller {
     /**
      * Realiza el render de la vista que muestra el detalle de la noticia
      * recibe el id de la noticia, devuelve tambien los comentarios asociados a esa noticia
-     * @param $id 
-     * @return void
+     * @param int $id 
+     * @return View
      */
     public function verDetalle($id) {
         $noticia = Noticia::find($id);
@@ -42,10 +42,10 @@ class NoticiasController extends Controller {
     }
 
     /**
-     * Permite filtrar las categorias por el id de categoría recibido
+     * Permite filtrar las categorías por el id de categoría recibido
      * renderiza nuevamente la view con los datos filtrados
-     * @param $idCategoria 
-     * @return void
+     * @param int $idCategoria 
+     * @return View
      */
     public function filtrarPorCategoria($idCategoria) {
         $noticias = Noticia::where('id_categoria', $idCategoria)->get();
@@ -55,8 +55,8 @@ class NoticiasController extends Controller {
      /**
      * Permite buscar las noticias por el query param recibido "search"
      * Actualmente realiza un like solo en contenido, no en título de la noticia
-     * @param $request
-     * @return void
+     * @param Request $request
+     * @return View
      */
     public function buscar(Request $request) {
         $search = $request->input('search');
@@ -71,9 +71,9 @@ class NoticiasController extends Controller {
      /**
      * Permite realizar la acción de editar una noticia
      * recibe el id de la noticia y el request, valida los datos
-     * @param $request
-     * @param $id
-     * @return void
+     * @param Request $request
+     * @param int $id
+     * @return View
      */
     public function editar(Request $request, $id) {
 		$request->validate(Noticia::$rules);
@@ -88,8 +88,8 @@ class NoticiasController extends Controller {
     
     /**
      * Permite eliminar una noticia por el id de la misma
-     * @param $id
-     * @return void
+     * @param int $id
+     * @return View
      */
     public function eliminar($id) {
 		$noticia = Noticia::find($id);
@@ -105,8 +105,8 @@ class NoticiasController extends Controller {
      * Permite agregar una noticia, hacer un insert en la tabla
      * valida los datos, guarda la imagen si existe, sino muestra una por defecto
      * agrega la fecha del sistema como fecha de publicación al momento de hacer el save...
-     * @param $request
-     * @return void
+     * @param Request $request
+     * @return View
      */
     public function agregar(Request $request) {
 		$request->validate(Noticia::$rules);
@@ -120,6 +120,7 @@ class NoticiasController extends Controller {
     /**
      * Eliminar los comentarios de la publicación
      * @param $comentarios
+     * @return void
      */
     private function eliminarComentarios($comentarios) {
         foreach($comentarios as $comentario) {
@@ -129,9 +130,9 @@ class NoticiasController extends Controller {
 
     /**
      * Permite agregar la imagen si existe
-     * @param $request
-     * @param $formData
-     * @return $formData
+     * @param Request $request
+     * @param array $formData
+     * @return array
      */
     private function subirImagenSiPosee($request, $formData) {
         if($request->hasFile('imagen')) {
@@ -147,7 +148,8 @@ class NoticiasController extends Controller {
 
     /**
      * Permite realizar el redirect con un mensaje para manipular desde la view
-     * @param $mensaje
+     * @param string $mensaje
+     * @return View
      */
     private function redirectConMensaje($mensaje) {
         return redirect()->route('panel.index')->with('message', $mensaje);
@@ -155,9 +157,10 @@ class NoticiasController extends Controller {
 
     /**
      * Método para realizar el redirect con los datos ya cargados que necesita
-     * la vista (categorias, noticias)
-     * @param $noticias
-     * @return void
+     * la vista (categorías, noticias)
+     * @param string $view
+     * @param array $noticias
+     * @return View
      */
     private function mostrarViewConCategorias($view, $noticias) {
         $categorias = Categoria::all();

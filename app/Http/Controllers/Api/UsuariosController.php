@@ -9,13 +9,30 @@ use Illuminate\Support\Facades\Hash;
 use App\Models\Usuario;
 use Validator;
 
+/**
+ * Clase que se encarga de manipular los endpoints de usuarios (API)
+ * @author mtorre4580
+ */
 class UsuariosController extends Controller {
    
+    /**
+     * Permite obtener todos los usuarios en el site
+     * @return json
+     */
     public function findAll() {
-        $users = Usuario::all();
-        return response()->json($users);
+        try {
+            $users = Usuario::all();
+            return response()->json($users);
+        } catch (QueryException $e) {
+            return $this->genericError('Se produjo un error al obtener los usuarios');
+        }
     }
 
+    /**
+     * Permite registar un usuario por default no tiene rol de admin
+     * @param Request $request
+     * @return json
+     */
     public function save(Request $request) {
         try {
             $data = $request->all();

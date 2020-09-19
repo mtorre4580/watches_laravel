@@ -13,50 +13,63 @@ html {
     position: relative;
     min-height: 100%;
 }
+
 body {
     margin-bottom: 60px;
     background-color:#f5f5f5
 }
+
 .navbar-nav .nav-link {
     color: #fafafa;
 }
+
 .nav-link:hover{
     color: #dedede;
 }
+
 .nav-fan-watches {
     background-color:#212121;
 }
+
 .nav-link-fan-watches, .subtitle-brand-fan-watches  {
     font-family: 'Inconsolata', monospace;
 }
+
 .brand-fan-watches {
     font-family: 'Charmonman', cursive;
     letter-spacing: 0.1em;
     color: #FFEB3B;
 }
+
 .navbar-brand:hover {
     color: #FDD835;
 }
+
 .jumbotron-fan-watches {
     background-color: #424242;
 }
+
 .jumbotron-fan-watches .lead {
     color: #f5f5f5;
     font-weight: 400;
     font-family: 'Roboto', sans-serif;
 }
+
 .subtitle-fan-watches {
     font-family: 'Inconsolata', monospace;
 }
+
 .content-fan-watches {
     max-width: 50em;
     font-family: 'Roboto', sans-serif;
 }
+
 .icon-fan-watches {
     font-size: 6em;
     padding: .1em;
     color: #8BC34A;
 }
+
 .footer-fan-watches {
     position: absolute;
     bottom: 0;
@@ -66,118 +79,148 @@ body {
     border-top: 3px solid #f5f5f5;   
     color: #fafafa;
 }
+
 .nav-link-category-fan-watches {
     color: #424242;
     font-family: 'Inconsolata', monospace;
     margin-left: 1em;
     margin-right: 1em;
 }
+
 .navbar-categories-fan-watches {
     padding: 1em;
     font-weight: 800;
     letter-spacing: .2rem;
 }
+
 .nav-link-category-fan-watches:hover{
     color: #212121;
     text-decoration: none;
 }
+
 .card-fan-watches  {
     border-radius: 0;
     border: none;
     box-shadow: .1em .1em .5em #dedede;
 }
+
 .card-fan-watches  img  {
     border-top-left-radius: 0;
     border-top-right-radius: 0;
 }
+
 .card-fan-watches .card-title {
     font-family: 'Inconsolata', monospace;
     font-weight: 600;
 }
+
 .card-fan-watches .card-text, .container-brand-fan-watches p  {
     font-family: 'Roboto', sans-serif;
     color: #424242;
 }
+
 .hover-fan-watches:hover{
     opacity: 0.7;
 }
+
 .title-popular-topics-fan-watches, .container-brand-fan-watches h3  {
     font-family: 'Inconsolata', monospace;
 }
+
 .list-group-topics-fan-watches .list-group-item{
     background-color: transparent;
     font-family: 'Roboto', sans-serif;
 }
+
 .list-group-topics-fan-watches .active {
     color: #212121;
     font-weight: bold;
     border-top-color: transparent;
     border-bottom-color: transparent;
 }
+
 .list-group-item-action:hover{
     font-weight: bold;
 }
+
 .badge-category-fan-watches {
     background-color: #FF5722;
 }
+
 .card-max-width-fan-watches {
     width: 30%;
 }
+
 .background-category {
     background-color: #E0E0E0;
     box-shadow: .2em .1em .1em .1em #424242;
 }
+
 .breadcrumb-fan-watches {
     background-color: transparent;
     font-family: 'Inconsolata', monospace;
 }
+
 .breadcrumb-item , .breadcrumb-item a{
     color: #212121;
 }
+
 .breadcrumb .active {
     color: #FF5722;
     font-weight: bold;
 }
+
 .not-results-fan-watches {
     font-size: 5em;
     color: #FF5722;
 }
+
 .form-control-fan-watches-search {
     border: none;
 }
+
 .form-login-fan-watches {
     width: 60%;
 }
+
 .form-login-fan-watches label {
     font-family: 'Inconsolata', monospace;
     font-weight: bold;
 }
+
 .form-login-fan-watches .material-icons {
     color: #FFEB3B;
 }
+
 .form-login-fan-watches .input-group-text {
     background-color: #212121;
     border: 0;
 }
+
 .alert-success, .alert-fan-watches {
     font-family: 'Roboto', sans-serif;
     font-weight: 400;
 }
+
 .alert-fan-watches {
     border-radius: 0;
     border-color: transparent;
     margin-top: 1em;
 }
+
 .form-edit-content-left-fan-watches {
     width: 60%;
 }
+
 textarea {
     resize: none;
 }
+
 .container-form-edit-image {
     width: 40%;
     margin: 1em;
 }
+
 .container-brand-fan-watches {
     background-color: #fff;
     border-bottom: .1em solid #FDD835;
@@ -185,48 +228,60 @@ textarea {
     padding: 1em;
     box-shadow: .1em .1em .2em .1em #dedede;
 }
+
 .container-brand-fan-watches:last-child {
     margin-bottom: 4em;
 }
+
 .max-width-image-brand-fan-wacthes {
     width: 40%;
 }
+
 .consejos-fan-watches {
     border: none;
     border-radius:0;
     background-color:transparent;
     font-family: 'Roboto', sans-serif;
 }
+
 .list-group-item:first-child {
     border: none;
 }
+
 .check-icon-fan-watches {
     font-size: 3em;
     color: #8BC34A;
     font-weight: bold;
 }
+
 .container-list-consejos {
     margin: 2em;
     padding-bottom: 2em;
 }
+
 .icon-no-avatar {
     font-size: 64px;
     color: #dedede;
 }
+
 .icon-avatar {
     height: 64px;
     width: 64px;
 }
+
 .container-comments {
     background-color: #fff;
     border-radius: 0.2em;
 }
+
 .no-margin {
     margin: 0;
 }
+
 .max-width {
     width: 100%;
 }
+
 .subtitulo-edit-form {
     border-bottom: 0.02em solid #212121;
 }

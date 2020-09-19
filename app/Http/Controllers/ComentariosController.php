@@ -19,8 +19,8 @@ class ComentariosController extends Controller {
     /**
      * Permite crear un nuevo comentario con los datos recibidos del request, valida los datos...
      * y luego redirige al detalle de la noticia con los comentarios actualizados
-     * @param $request
-     * @return void
+     * @param Request $request
+     * @return View
      */
     public function agregar(Request $request) {
         $request-> validate(Comentario::$rules);
@@ -32,8 +32,8 @@ class ComentariosController extends Controller {
     /**
      * Permite eliminar el comentario por el id del mismo
      * El comentario se puede eliminar si el usuario es el que lo escribió , o si es un Admin
-     * @param $request
-     * @return void
+     * @param int $id
+     * @return View
      */
     public function eliminar($id) {
         $comentario = Comentario::find($id);
@@ -48,9 +48,9 @@ class ComentariosController extends Controller {
 
     /**
      * Permite editar el comentario del usuario
-     * @param $request
-     * @param $id
-     * @return void
+     * @param Request $request
+     * @param int $id
+     * @return View
      */
     public function editar(Request $request, $id) {
         $request->validate(Comentario::$rules);
@@ -64,8 +64,9 @@ class ComentariosController extends Controller {
     /**
      * Permite hacer un redirect a una ruta especifica, enviando el id de la noticia 
      * a la cual pertenece el comentario
-     * @param $ruta
-     * @param $idNoticia 
+     * @param string $ruta
+     * @param int $idNoticia 
+     * @return View
      */
     private function redirectConQueryParams($ruta, $idNoticia) {
         return redirect()->route($ruta, ['id' => $idNoticia]);
@@ -75,8 +76,9 @@ class ComentariosController extends Controller {
      * Permite verificar si el usuario que quiere eliminar el comentario es el que creo el mismo
      * en caso que no lo sea, realiza un redirect, mostrando un mensaje de error que no lo
      * puede eliminar
-     * @param $user
-     * @param $comentario
+     * @param Usuario $user
+     * @param Comentario $comentario
+     * @return View
      */
     private function verificarSiPuedeEliminar($user, $comentario) {
         if (!$user->isAdmin() && $user->id_usuario != $comentario->usuario->id_usuario) {

@@ -16,7 +16,7 @@ class HomeController extends Controller {
     
     /**
      * Realiza el render de la vista que actua como index 
-     * @return void
+     * @return View
      */
     public function index() {
         return view('home.index');

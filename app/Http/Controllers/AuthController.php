@@ -19,7 +19,7 @@ class AuthController extends Controller {
    
     /**
      * Realiza el render de la vista que actua como index 
-     * @return void
+     * @return View
      */
     public function index() {
         return view('auth.login');
@@ -27,7 +27,7 @@ class AuthController extends Controller {
 
     /**
      * Realiza el render de la vista que permite registrar a los usuarios
-     * @return void
+     * @return View
      */
     public function doRegistrar() {
         return view('auth.registrar');
@@ -36,8 +36,8 @@ class AuthController extends Controller {
     /**
      * Autentica al usuario, valida el request recibido
      * si no es correcto realiza el redirect correspondiente
-     * @param $request
-     * @return void
+     * @param Request $request
+     * @return View
      */
     public function autenticar(Request $request) {
         $request->validate(Usuario::$rules);
@@ -51,7 +51,8 @@ class AuthController extends Controller {
     /**
      * Registra a los usuarios de la aplicación, valida los datos recibidos
      * da de alta al usuario
-     * @param $request
+     * @param Request $request
+     * @return View
      */
     public function registrar(Request $request) {
         $request->validate(Usuario::$rules);
@@ -68,7 +69,7 @@ class AuthController extends Controller {
     /**
      * Cierra la sesión del usuario 
      * realiza el redirect a la view login
-     * @return void
+     * @return View
      */
     public function cerrarSesion() {
         Auth::logout();
@@ -80,7 +81,7 @@ class AuthController extends Controller {
 
     /**
      * Permite verificar si el email dado esta en uso por otro usuario
-     * @param $email
+     * @param string $email
      * @return boolean
      */
     private function emailEnUso($email) {
@@ -90,8 +91,8 @@ class AuthController extends Controller {
 
     /**
      * Permite hacer el encoding del password, y setear el flag de admin en false...
-     * @param $formData
-     * @return $formData
+     * @param array $formData
+     * @return array
      */
     private function hashearPasswordSetDefaultUsuario($formData) {
         $formData['password'] = Hash::make($formData['password']);
@@ -101,10 +102,10 @@ class AuthController extends Controller {
 
     /**
      * Permite hacer un redirect a una ruta especifica, enviando un mensaje ...
-     * @param $ruta
-     * @param $msg
-     * @param $data
-     * @return void
+     * @param string $ruta
+     * @param string $msg
+     * @param array $data
+     * @return View
      */
     private function redirectConData($ruta, $msg, $data) {
     	return redirect()->route($ruta)->with($msg, $data);

@@ -12,9 +12,9 @@
         <div class="d-flex justify-content-spacebetween ml-2">
             <div class="container">
                 <h1>{{$noticia->titulo}}</h1>
-                <p class="ml-2" style="font-size:1.2rem">{{$noticia->contenido}}</p>
+                <p class="ml-2">{{$noticia->contenido}}</p>
             </div>
-            <div class="container text-center" style="width:100%">
+            <div class="container text-center">
                 <img class="img-fluid rounded" src="/images/{{$noticia->imagen}}" alt="{{ $noticia->titulo }}">
                 <p class="my-2 font-weight-bold">Fecha de publicación: {{ $noticia->fecha_publicacion->format('d-m-Y') }}</p>
             </div>
@@ -23,7 +23,7 @@
             <h2>Comentarios</h2>
             @if(!Auth::check()) 
                 <div class="d-flex justify-content-spacebetween align-items-center p-2">
-                    <p style="margin:0">Necesitas estar logueado para poder comentar</p>
+                    <p class="no-margin">Necesitas estar logueado para poder comentar</p>
                     <div>
                         <a href="{{ route('login') }}" class="card-link ml-2">Inicia sesión</a>
                     </div>
@@ -63,7 +63,7 @@
                 @if(count($comentarios) === 0)
                     <p>Esta publicación no posee comentarios, se el primero!</p>
                 @endif
-                <div class="container" style="margin-bottom: 1em">
+                <div class="container">
                     @if($errors->has('contenido'))
                         <div class="alert alert-danger my-2 d-flex align-items-center"><i class="material-icons">warning</i> {{ $errors->first('contenido') }}</div>
                     @endif

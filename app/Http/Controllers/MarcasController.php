@@ -18,7 +18,7 @@ class MarcasController extends Controller {
     /**
      * Realiza el render de la vista que actua como index 
      * Tomo sólo las marcas con imágenes
-     * @return void
+     * @return View
      */
     public function index() {
         $marcas = Marca::obtenerTop5Marcas();
