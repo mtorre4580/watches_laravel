@@ -33,7 +33,7 @@
             </div>
             <button type="submit" class="btn btn-success">Iniciar sesión</button>
             @if(Session::has('loginError'))
-                <div class="alert alert-danger md-2  alert-fan-watches">{{ Session::get('loginError') }}</div>
+                <div class="alert alert-danger md-2  alert-fan-watches">Datos incorrectos</div>
             @endif
         </form>
     </div>

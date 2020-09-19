@@ -3,6 +3,7 @@
         <div class="form-group">
             <label for="titulo">Título</label>
             <input type="text" id="titulo" name="titulo" class="form-control" value="{{ old('titulo', $noticia->titulo) }}">
+            <p class="text-muted">El título es obligatorio y debe tener un mínimo de 3 carácteres</p>
             @if($errors->has('titulo'))
                 <div class="alert alert-danger my-2">{{ $errors->first('titulo') }}</div>
             @endif
@@ -23,6 +24,7 @@
         <div class="form-group">
             <label for="contenido">Contenido</label>
             <textarea name="contenido" id="contenido" rows="10" class="form-control">{{ old('contenido', $noticia->contenido) }}</textarea>
+            <p class="text-muted">El contenido es obligatorio y debe tener un mínimo de 40 carácteres</p>
         </div>
         @if($errors->has('contenido'))
             <div class="alert alert-danger">{{ $errors->first('contenido') }}</div>
