@@ -20,7 +20,7 @@ class Controller extends BaseController {
         if (!is_numeric($id)) {
             return response()->json(array('msg' => 'El id no es un número, ' . $id))->setStatusCode(400);
         }
-        return response()->json(array('msg' => 'El id no existe'))->setStatusCode(400);
+        return response()->json(array('msg' => 'El id no existe'))->setStatusCode(404);
     }
 
     /**

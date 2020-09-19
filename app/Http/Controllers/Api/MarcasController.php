@@ -23,18 +23,25 @@ class MarcasController extends Controller {
             $brands = Marca::all();
             return response()->json($brands);
         } catch (QueryException $e) {
-            
+            return $this->genericError('Se produjo un error al obtener las marcas');
         }
     }
 
     /**
-     * Permite obtener una marca por su id
+     * Permite obtener una marca por si id
      * @param int $id identificador de la marca
      * @return json
      */
     public function findById($id) {
-        $brand = Marca::find($id);
-        return response()->json($brand);
+        try {
+            $brand = Marca::find($id);
+            if ($brand) {
+                return response()->json($brand);
+            }
+            return $this->notFoundId($id);
+        } catch (QueryException $e) {
+           return $this->genericError('Se produjo un error al obtener la marca por el id');
+        }
     }
 
     /**
@@ -43,25 +50,35 @@ class MarcasController extends Controller {
      * @return json
      */
     public function delete($id) {
-        $brand = Marca::find($id);
-        $brand->delete(); 
-        return response()->json([
-            'success' => true,
-            'msg'     => 'Success delete',
-        ]);
+        try {
+            $brand = Marca::find($id);
+            if ($brand) {
+                $brand->delete();
+                return response()->json();
+            }
+            return $this->notFoundId($id);
+        } catch (QueryException $e) {
+            return $this->genericError('Se produjo un error al eliminar la marca');
+        }
     }
 
     /**
-     * Permite dar de alta una marca
+     * Permite crear una marca
      * @param Request $request objeto request
      * @return json
      */
     public function save(Request $request) {
-        $data = $request->all();
-        $brand = Marca::create($data);
-        return response()->json([
-            'msg'    => $brand->id_marca,
-        ]);
+        try {
+            $data = $request->all();
+            $validator = Validator::make($data, Marca::$rules);
+            if ($validator->passes()) {
+                $new = Marca::create($data);
+                return response()->json(array('id' => $new->id_marca));
+            }
+            return response()->json($validator->errors())->setStatusCode(400);
+        } catch (QueryException $e) {
+            return $this->genericError('Se produjo un error al crear la marca');
+        }
     }
 
     /**
@@ -71,7 +88,22 @@ class MarcasController extends Controller {
      * @return json
      */
     public function update($id, Request $request) {
-        
+        try {
+            $brand = Marca::find($id);
+            if ($brand) {
+                $data = $request->all();
+                $validator = Validator::make($data, Marca::$rules);
+                if ($validator->passes()) {
+                    $brand->fill($data);
+                    $brand->save();
+                    return response()->json();
+                }
+                return response()->json($validator->errors())->setStatusCode(400);
+            }
+            return $this->notFoundId($id);
+        } catch (QueryException $e) {
+            return $this->genericError('Se produjo un error al actualizar la marca');
+        }
     }
 
 }

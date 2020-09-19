@@ -19,4 +19,11 @@ class Categoria extends Model {
 
     protected $fillable = ['descripcion'];
 
+    public static $rules = ['descripcion' => 'required|min:3'];
+
+    public static $errorMessages = [
+      'descripcion.required' => 'La descripción es obligatoria',
+      'descripcion.min' => 'La descripción debe tener un mínimo 3 carácteres',
+    ];
+
 }

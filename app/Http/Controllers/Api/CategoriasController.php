@@ -13,37 +13,53 @@ use Validator;
  * @author mtorre4580
  */
 class CategoriasController extends Controller {
+
     /**
      * Permite obtener todas las categorías del site
      * @return json
-     */  
+     */ 
     public function findAll() {
-        $categories = Categoria::all();
-        return response()->json($categories);
+        try {
+            $categories = Categoria::all();
+            return response()->json($categories);
+        } catch (QueryException $e) {
+            return $this->genericError('Se produjo un error al obtener las categorías');
+        }
     }
 
-     /**
-     * Permite obtener el detalle de la categoría por el id
+    /**
+     * Permite obtener una categoría por si id
      * @param int $id identificador de la categoría
      * @return json
      */
     public function findById($id) {
-        $category = Categoria::find($id);
-        return response()->json($category);
+        try {
+            $category = Categoria::find($id);
+            if ($category) {
+                return response()->json($category);
+            }
+            return $this->notFoundId($id);
+        } catch (QueryException $e) {
+           return $this->genericError('Se produjo un error al obtener la categoría por id');
+        }
     }
 
-     /**
+    /**
      * Permite eliminar una categoría por el id de la misma
      * @param int $id identificador de la categoría
      * @return json
      */
     public function delete($id) {
-        $category = Categoria::find($id);
-        $category->delete(); 
-        return response()->json([
-            'success' => true,
-            'msg'     => 'Success delete',
-        ]);
+        try {
+            $category = Categoria::find($id);
+            if ($category) {
+                $category->delete();
+                return response()->json();
+            }
+            return $this->notFoundId($id);
+        } catch (QueryException $e) {
+            return $this->genericError('Se produjo un error al eliminar la categoría');
+        }
     }
 
     /**
@@ -52,11 +68,17 @@ class CategoriasController extends Controller {
      * @return json
      */
     public function save(Request $request) {
-        $data = $request->all();
-        $categoria = Categoria::create($data);
-        return response()->json([
-            'msg'    => $categoria->id_categoria,
-        ]);
+        try {
+            $data = $request->all();
+            $validator = Validator::make($data, Categoria::$rules);
+            if ($validator->passes()) {
+                $category = Categoria::create($data);
+                return response()->json(array('id' => $category->id_categoria));
+            }
+            return response()->json($validator->errors())->setStatusCode(400);
+        } catch (QueryException $e) {
+            return $this->genericError('Se produjo un error al crear la categoría');
+        }
     }
 
     /**
@@ -65,8 +87,23 @@ class CategoriasController extends Controller {
      * @param Request $request objeto request
      * @return json
      */
-    public function update(Request $request) {
-        
+    public function update($id, Request $request) {
+        try {
+            $category= Categoria::find($id);
+            if ($category) {
+                $data = $request->all();
+                $validator = Validator::make($data, Categoria::$rules);
+                if ($validator->passes()) {
+                    $category->fill($data);
+                    $category->save();
+                    return response()->json();
+                }
+                return response()->json($validator->errors())->setStatusCode(400);
+            }
+            return $this->notFoundId($id);
+        } catch (QueryException $e) {
+            return $this->genericError('Se produjo un error al actualizar la categoría');
+        }
     }
 
 }

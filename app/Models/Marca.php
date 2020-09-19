@@ -20,8 +20,22 @@ class Marca extends Model {
 
     protected $fillable = ['nombre', 'logo', 'web', 'historia', 'origen'];
 
+    public static $rules = ['nombre' => 'required|min:3', 'logo' => 'required|string', 'web' => 'required|string', 'historia' => 'required|string', 'origen' => 'required|string'];
+
+    public static $errorMessages = [
+      'nombre.required' => 'El nombre es obligatorio',
+      'nombre.min' => 'El nombre debe tener un mínimo 3 carácteres',
+      'logo.string' => 'El logo debe ser texto',
+      'web.string' => 'La web debe ser texto',
+      'historia.required' => 'La historia es obligatoria',
+      'historia.string' => 'La historia debe ser texto',
+      'origen.required' => 'El origen es obligatorio',
+      'origen.string' => 'El origen debe ser texto',
+    ];
+
     /**
      * Permite obtener el top 5 de las marcas, por ahora lo simulo trayendo sólo las que tienen imágenes
+     * @return Marca
      */
     public static function obtenerTop5Marcas() {
         return Marca::where('logo', '<>', '')->get();
