@@ -79,7 +79,10 @@ class NoticiasController extends Controller {
 		$request->validate(Noticia::$rules);
         $formData = $request->except(['_token', '_method']);
         $formData = $this->subirImagenSiPosee($request, $formData);
-		$noticia = Noticia::find($id);
+        $noticia = Noticia::find($id);
+        if ($noticia['imagen'] != 'sin-imagen.png' && $formData['imagen'] == 'sin-imagen.png') {
+            $formData['imagen'] = $noticia['imagen'];
+        }
         $noticia->fill($formData);
         $noticia->fecha_publicacion = date('Y-m-d H:i:s');
         $noticia->save();
