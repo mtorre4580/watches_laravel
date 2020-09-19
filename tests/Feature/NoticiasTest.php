@@ -92,12 +92,12 @@ class NoticiasTest extends TestCase {
 
     /**
      * Permite verificar el endpoint GET /api/noticias/{id}
-     * Status 400 (BadRequest) no existe el id
+     * Status 404 (NotFound) no existe el id
      * @return void
      */
     public function testInvalidFindById() {
         $response = $this->json('get','api/noticias/1');
-        $response->assertStatus(400);
+        $response->assertStatus(404);
         $response->assertJson(['msg' => 'El id no existe']);
     }
 
@@ -112,12 +112,12 @@ class NoticiasTest extends TestCase {
 
     /**
      * Permite verificar el endpoint DELETE /api/noticias/{id}
-     * Status 400 (BadRequest) no existe el id
+     * Status 404 (NotFound) no existe el id
      * @return void
      */
     public function testInvalidDelete() {
         $response = $this->json('delete','api/noticias/1');
-        $response->assertStatus(400);
+        $response->assertStatus(404);
         $response->assertJson(['msg' => 'El id no existe']);
     }
 
