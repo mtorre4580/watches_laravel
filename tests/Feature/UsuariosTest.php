@@ -32,7 +32,7 @@ class UsuariosTest extends TestCase {
         $response->assertJsonCount(6);
     }
 
-    /**
+   /**
      * Permite verificar el endpoint GET /api/usuarios que esta protegido
      * Status 401 (Unauthorized)
      * @return void
@@ -43,7 +43,7 @@ class UsuariosTest extends TestCase {
         $response->assertJson(['status' => 'No autorizado']);
     }
 
-     /**
+    /**
      * Permite verificar el endpoint GET /api/usuarios/{id}
      * Status 200 (OK)
      * @return void
@@ -54,7 +54,6 @@ class UsuariosTest extends TestCase {
         $response->assertJson([
             'id_usuario' => 1,
             'email' => 'mtorre4580@gmail.com',
-            'password' => '$2y$10$U1u66XqzGgO/7O5zsrI8S.yHVqYnsg51DlpUnnaEWUXUX54F47V0.',
             'is_admin' => 1,
             'remember_token' => null,
         ]);
@@ -66,10 +65,7 @@ class UsuariosTest extends TestCase {
      * @return void
      */
     public function testSave() {
-        $request = [
-            'email' => 'test1234@gmail.com',
-            'password' => '123456'
-        ];
+        $request = array('email' => 'test1234@gmail.com', 'password' => '123456');
         $response = $this->json('post','api/usuarios', $request);
         $response->assertStatus(200);
     }
@@ -80,7 +76,7 @@ class UsuariosTest extends TestCase {
      * @return void
      */
     public function testInvalidSave() {
-        $request = ['email' => 'test1234@gmail.com'];
+        $request = array('email' => 'test1234@gmail.com');
         $response = $this->json('post','api/usuarios', $request);
         $response->assertStatus(400);
         $response->assertJson(['password' => ['El campo password es obligatorio.']]);

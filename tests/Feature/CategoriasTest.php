@@ -38,9 +38,7 @@ class CategoriasTest extends TestCase {
      * @return void
      */
     public function testSave() {
-        $request = [
-            'descripcion' => 'Homemade'
-        ];
+        $request = array('descripcion' => 'Homemade');
         $response = $this->json('post','api/categorias', $request);
         $response->assertStatus(200);
         $response->assertJson(['id' => 6]);
@@ -52,12 +50,10 @@ class CategoriasTest extends TestCase {
      * @return void
      */
     public function testInvalidSave() {
-        $request = ['descripcion' => ''];
+        $request = array('descripcion' => '');
         $response = $this->json('post','api/categorias', $request);
         $response->assertStatus(400);
-        $response->assertJson([
-            'descripcion' => ['El campo descripcion es obligatorio.'], 
-        ]);
+        $response->assertJson(['descripcion' => ['El campo descripcion es obligatorio.']]);
     }
 
     /**
@@ -68,12 +64,9 @@ class CategoriasTest extends TestCase {
     public function testFindById() {
         $response = $this->json('get','api/categorias/2');
         $response->assertStatus(200);
-        $response->assertJson([
-            'id_categoria' => 2,
-            'descripcion' => 'Eventos'
-        ]);
+        $response->assertJson(['id_categoria' => 2, 'descripcion' => 'Eventos']);
     }
-
+    
     /**
      * Permite verificar el endpoint GET /api/categorias/{id}
      * Status 400 (BadRequest) no existe el id
@@ -81,7 +74,7 @@ class CategoriasTest extends TestCase {
      */
     public function testInvalidFindById() {
         $response = $this->json('get','api/categorias/1123');
-        $response->assertStatus(400);
+        $response->assertStatus(404);
         $response->assertJson(['msg' => 'El id no existe']);
     }
 
@@ -111,26 +104,21 @@ class CategoriasTest extends TestCase {
      * @return void
      */
     public function testUpdate() {
-        $request = [
-            'id_categoria' => 4,
-            'descripcion' => 'Descripción modificada...'
-        ];
-        $response = $this->json('put','api/marcas/4', $request);
+        $request = array('id_categoria' => 4, 'descripcion' => 'Descripción modificada...');
+        $response = $this->json('put','api/categorias/4', $request);
         $response->assertStatus(200);
     }
-
-     /**
-     * Permite verificar el endpoint PUT /api/marcas/{id}
+    
+    /**
+     * Permite verificar el endpoint PUT /api/categorias/{id}
      * Status 400 (BadRequest)
      * @return void
      */
     public function invalidUpdate() {
-        $request = [
-            'id_categoria' => 4,
-            'descripcion' => ''
-        ];
-        $response = $this->json('put','api/marcas/4', $request);
+        $request = array('id_categoria' => 4, 'descripcion' => '');
+        $response = $this->json('put','api/categorias/4', $request);
         $response->assertStatus(400);
         $response->assertJson(['descripcion' => ['El campo descripcion es obligatorio.']]);
     }
+
 }

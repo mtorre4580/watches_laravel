@@ -38,32 +38,32 @@ class MarcasTest extends TestCase {
      * @return void
      */
     public function testSave() {
-        $request = [
+        $request = array(
             'nombre' => 'Cartier',
             'logo' => 'cartier.jpg',
             'historia' => 'Cartier fue fundada en París en 1847 por Louis-François Cartier, cuando se hizo cargo del taller de su maestro',
             'origen' => 'Francia',
             'web' => 'https://www.cartier.com'
-        ];
+        );
         $response = $this->json('post','api/marcas', $request);
         $response->assertStatus(200);
         $response->assertJson(['id' => 11]);
     }
 
-    /**
+     /**
      * Permite verificar el endpoint POST /api/marcas
      * Status 400 (BadRequest)
      * @return void
      */
     public function testInvalidSave() {
-        $request = ['logo' => 'cartier.jpg'];
+        $request = array('logo' => 'cartier.jpg');
         $response = $this->json('post','api/marcas', $request);
         $response->assertStatus(400);
         $response->assertJson([
-            'logo' => ['El campo logo es obligatorio.'], 
-            'web' => ['El campo web es obligatorio.'],
-            'historia' => ['El campo historia es obligatorio.'],
-            'origen' => ['El campo origen es obligatorio.']
+            "nombre" => ["El campo nombre es obligatorio."],
+            "web" => ["El campo web es obligatorio."],
+            "historia" => ["El campo historia es obligatorio."],
+            "origen" => ["El campo origen es obligatorio."]
         ]);
     }
 
@@ -96,7 +96,7 @@ class MarcasTest extends TestCase {
         $response->assertJson(['msg' => 'El id no existe']);
     }
 
-    /**
+     /**
      * Permite verificar el endpoint DELETE /api/marcas/{id}
      * Status 200 (OK)
      */
@@ -122,27 +122,25 @@ class MarcasTest extends TestCase {
      * @return void
      */
     public function testUpdate() {
-        $request = [
+        $request = array(
             'id_marca' => 5,
             'nombre' => 'Chopard, Modificado',
             'origen' => 'México',
             'logo' => 'Chopard.jpg',
             'web' => 'https://www.chopard.com/intl/',
             'historia' => 'Chopard no sólo es conocida por sus relojes suizos, sino también por sus increíbles piezas de joyería.'
-        ];
+        );
         $response = $this->json('put','api/marcas/5', $request);
         $response->assertStatus(200);
     }
 
-     /**
+    /**
      * Permite verificar el endpoint PUT /api/marcas/{id}
      * Status 400 (BadRequest)
      * @return void
      */
     public function invalidUpdate() {
-        $request = [
-            'nombre' => 'Chopard, Modificado',
-        ];
+        $request = array('nombre' => 'Chopard, Modificado');
         $response = $this->json('put','api/marcas/5', $request);
         $response->assertStatus(400);
         $response->assertJson([
